@@ -45,9 +45,13 @@
               "target": "Package",
               "version": "[2.0.30, )"
             },
-            "Microsoft.AspNetCore.Mvc": {
+            "MatBlazor": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[2.1.0, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.9.10, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",

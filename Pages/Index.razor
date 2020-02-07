@@ -1,0 +1,16 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<MatButton Raised="true">Test</MatButton>
+<p>
+    <MatDatePicker @bind-Value="@Date1"></MatDatePicker>
+</p>
+
+
+
+@code {
+    public DateTime? Date1 { get; set; } = DateTime.Now.AddDays(-10);
+}

@@ -21,15 +21,9 @@ namespace demo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-
             services.AddRazorPages();
+            services.AddServerSideBlazor();
+            services.AddSingleton<WeatherForecastService>();
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<IPeopleRepository, PeopleRepository>();
         }
@@ -44,11 +38,16 @@ namespace demo
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseEndpoints(endpoints => endpoints.MapRazorPages());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
+            });
         }
     }
 }

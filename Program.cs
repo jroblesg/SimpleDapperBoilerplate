@@ -8,27 +8,14 @@ namespace demo
     {
         public static void Main(string[] args)
         {
-            var host = new HostBuilder()
-            .UseContentRoot(Directory.GetCurrentDirectory())
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseKestrel(serverOptions => { })
-                .UseIISIntegration()
-                .UseStartup<Startup>();
-            })
-            .Build();
-
-            host.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
-                webBuilder.UseIISIntegration();
-                webBuilder.ConfigureKestrel(serverOptions => {})
-                .UseStartup<Startup>();
-            });
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
